@@ -107,7 +107,7 @@ public class Graph{
 }
 ```
 
-### Detect cycle using DFS
+### Detect cycle using DFS in undirected graph
 ```
 import java.util.*;
 public class Graph{
@@ -129,7 +129,7 @@ public class Graph{
   }
 }
 ```
-### Detect cycle using BFS
+### Detect cycle using BFS in undirected graph
 ```
 import java.util.*;
 public class Graph{
@@ -154,5 +154,37 @@ public class Graph{
     }
     return false;
   }
+}
+```
+### Detect cycle using DFS in directed graph
+```
+import java.util.*;
+public class Graph{
+   public static boolean DFSRecc(ArrayList<ArrayList<Integer>> adj, int s, boolean visited[], boolean reccSt[]){
+      visited[s] = true;
+      reccSt[s] = true;
+      for(int u:adj.get(s)){
+        if(visited[u]==false && DFSRecc(adj,u,visited,reccSt)){
+          return true;
+        } else if(reccSt[u]==true){
+          return true;
+        }
+      }
+      reccSt[s] = false;
+      return false;
+   }
+   
+   public static boolean detectCycle(ArrayList<ArrayList<Integer>> adj, int v){
+      boolean visited[] = new boolean[v];
+      boolean reccSt[] = new boolean[v];
+      for(int i=0;i<v;i++){
+        if(visited[i]==false){
+          if(DFSRecc(ajd,i,visited,reccSt)){
+            return true;
+          }
+        }
+      }
+      return false;
+   }
 }
 ```
