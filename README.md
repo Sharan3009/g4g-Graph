@@ -106,3 +106,26 @@ public class Graph{
   }
 }
 ```
+
+### Detect cycle using DFS
+```
+imort java.util.*;
+public class Graph{
+  public static boolean detectCycle(ArrayList<ArrayList<Integer>> adj,int v, int s){
+    boolean visited[] = new boolean[v];
+    return DFSRecc(adj,s,visited,-1);
+  }
+  
+  public static boolean DFSRecc(ArrayList<ArrayList<Integer>> adj, int s, boolean visited[], int parent){
+    visited[s] = true;
+    for(int v:adj.get(s)){
+      if(visited[v]==false){
+          if(DFSRecc(adj,v,visited,s))
+            return true;
+      } else if(v!=parent)
+            return true;
+    }
+    return false;
+  }
+}
+```
