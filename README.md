@@ -58,3 +58,25 @@ public class Graph{
   }
 }
 ```
+### DFS connected
+```
+import java.util.*;
+public class Graph{
+  public static void DFSRec(ArrayList<ArrayList<Integer>> adj, int s,boolean visited[],ArrayList<Integer> al){
+    visited[s] = true;
+    al.add(s);
+    for(int v:adj.get(s)){
+        if(visited[v]==false){
+            DFSRec(adj,v,visited,al);
+        }
+    }
+  }
+  
+  public static ArrayList<Integer> DFS(ArrayList<ArrayList<Integer>> adj,int v,int s){
+    boolean visited[] = new boolean[v];
+    ArrayList<Integer> al = new ArrayList<>();
+    DFSRec(adj,s,visited,al);
+    return al;
+  }
+}
+```
