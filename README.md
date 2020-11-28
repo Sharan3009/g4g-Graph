@@ -109,7 +109,7 @@ public class Graph{
 
 ### Detect cycle using DFS
 ```
-imort java.util.*;
+import java.util.*;
 public class Graph{
   public static boolean detectCycle(ArrayList<ArrayList<Integer>> adj,int v, int s){
     boolean visited[] = new boolean[v];
@@ -124,6 +124,33 @@ public class Graph{
             return true;
       } else if(v!=parent)
             return true;
+    }
+    return false;
+  }
+}
+```
+### Detect cycle using BFS
+```
+import java.util.*;
+public class Graph{
+  public static boolean detectCycle(ArrayList<ArrayList<Integer>> adj,int v, int s){
+    boolean visited[] = new boolean[v];
+    int parent[] = new int[v];
+    Arrays.fill(parent,-1);
+    Queue<Integer> q = new LinkedList<>();
+    q.add(s);
+    visited[s] = true;
+    while(!q.isEmpty()){
+        int u = q.poll();
+        for(int n:adj.get(u)){
+            if(visited[n]==false){
+                visited[n] = true;
+                q.add(n);
+                parent[n] = u;
+            } else if(n!=parent[u]){
+                    return true;
+            }
+        }
     }
     return false;
   }
