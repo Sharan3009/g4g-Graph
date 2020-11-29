@@ -259,7 +259,7 @@ public class Graph{
     int dist[] = new int[V];
     Arrays.fill(dist,Integer.MAX_VALUE);
     dist[s] = 0;
-    boolean fin[] = new boolean[];
+    boolean fin[] = new boolean[V];
     for(int count=0;count<V;count++){
       int u = -1;
       for(int v=0;v<V;v++){
