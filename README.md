@@ -188,3 +188,37 @@ public class Graph{
    }
 }
 ```
+### Detect cycle using BFS in directed graph
+```
+import java.util.*;
+public class Graph{
+  public static boolean detectCycle(ArrayList<ArrayList<Integer>> adj, int V){
+    int indegree[] = new int[V];
+    for(ArrayList<Integer> al: adj){
+      for(int v:al){
+        indegree[v]++;
+      }
+    }
+    int count = 0;
+    Queue<Integer> q = new LinkedList<>();
+    for(int d:indegree){
+      if(d==0){
+        q.add(d);
+        count++;
+      }
+    }
+    while(!q.isEmpty()){
+      int u = q.poll();
+      for(int v:adj.get(u)){
+        indegree[v]--;
+        if(indegree[v]==0){
+          q.add(v);
+          count++;
+        }
+      }
+    }
+    if(count!=V) return true;
+    return false;
+  }
+}
+```
