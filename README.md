@@ -221,3 +221,33 @@ public class Graph{
   }
 }
 ```
+
+### Prim's algorithm
+```
+import java.util.*;
+public class Graph{
+    public static int prim(int arr[][], int V){
+        int key[] = new int[V];
+        Arrays.fill(key,Integer.MAX_VALUE);
+        key[0] = 0;
+        boolean mSet[] = new boolean[V];
+        int res = 0;
+        for(int count=0;count<V;count++){
+            int u = -1;
+            for(int i=0;i<V;i++){
+                if(!mSet[i] && (u==-1 || key[i]<key[u])){
+                    u = i;
+                }
+            }
+            mSet[u] = true;
+            res += key[u];
+            for(int v=0;v<V;v++){
+                if(!mSet[v] && arr[v][u]!=0 && arr[v][u]<key[v]){
+                    key[v] = arr[v][u];
+                }
+            }
+        }
+        return res;
+    }
+}
+```
