@@ -204,7 +204,6 @@ public class Graph{
     for(int d:indegree){
       if(d==0){
         q.add(d);
-        count++;
       }
     }
     while(!q.isEmpty()){
@@ -213,9 +212,9 @@ public class Graph{
         indegree[v]--;
         if(indegree[v]==0){
           q.add(v);
-          count++;
         }
       }
+      count++;
     }
     if(count!=V) return true;
     return false;
