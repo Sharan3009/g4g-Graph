@@ -188,7 +188,7 @@ public class Graph{
    }
 }
 ```
-### Detect cycle using BFS in directed graph
+### Detect cycle using BFS in directed graph (Using Kahn's algorithm)
 ```
 import java.util.*;
 public class Graph{
