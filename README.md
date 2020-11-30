@@ -278,3 +278,63 @@ public class Graph{
   }
 }
 ```
+### Kosaraju's algorithm (Strongly connected components)
+```
+import java.util.*;
+public class Graph{
+    public static ArrayList<ArrayList<Integer>> kosaraju(ArrayList<ArrayList<Integer>> adj, int V){
+        Stack<Integer> st = findTopoSort(adj,V);
+        ArrayList<ArrayList<Integer>> tr = transpose(adj,V);
+        boolean visited[] = new boolean[V];
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        while(!st.isEmpty()){
+            int u = st.pop();
+            if(visited[u]==false){
+                ArrayList<Integer> temp = new ArrayList<>();
+                DFS(tr,null,temp,visited,u);
+                res.add(temp);
+            }
+        }
+        return res;
+    }
+    
+    public static Stack<Integer> findTopoSort(ArrayList<ArrayList<Integer>> adj,int V){
+        Stack<Integer> st = new Stack<>();
+        boolean visited[] = new boolean[V];
+        for(int i=0;i<V;i++){
+            if(visited[i]==false){
+                DFS(adj,st,null,visited,i);
+            }
+        }
+        return st;
+    }
+    
+    public static void DFS(ArrayList<ArrayList<Integer>> adj, Stack<Integer> st,ArrayList<Integer> al, boolean visited[],int s){
+        visited[s] = true;
+        if(al!=null){
+            al.add(s);
+        }
+        for(int u:adj.get(s)){
+            if(visited[u]==false){
+                DFS(adj,st,al,visited,u);
+            }
+        }
+        if(st!=null){
+            st.push(s);
+        }
+    }
+    
+    public static ArrayList<ArrayList<Integer>> transpose(ArrayList<ArrayList<Integer>> adj,int V){
+        ArrayList<ArrayList<Integer>> tr = new ArrayList<>();
+        for(int i=0;i<V;i++){
+            tr.add(new ArrayList<Integer>());
+        }
+        for(int i=0;i<V;i++){
+            for(int u:adj.get(i)){
+                tr.get(u).add(i);
+            }
+        }
+        return tr;
+    }
+}
+```
