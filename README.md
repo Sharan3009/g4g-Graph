@@ -221,8 +221,7 @@ public class Graph{
   }
 }
 ```
-
-### Prim's algorithm
+### Prim's algorithm (Minimum spanning tree)
 ```
 import java.util.*;
 public class Graph{
@@ -251,34 +250,8 @@ public class Graph{
     }
 }
 ```
-### Dijkstra's algorithm
-```
-import java.util.*;
-public class Graph{
-  public static int[] dijkstra(int graph[][],int V, int s){
-    int dist[] = new int[V];
-    Arrays.fill(dist,Integer.MAX_VALUE);
-    dist[s] = 0;
-    boolean fin[] = new boolean[V];
-    for(int count=0;count<V;count++){
-      int u = -1;
-      for(int v=0;v<V;v++){
-        if(!fin[v] && (u==-1 || dist[v]<dist[u])){
-          u = v;
-        }
-      }
-      fin[u] = true;
-      for(int v=0;v<V;v++){
-        if(!fin[v] && graph[v][u]!=0){
-          dist[v] = Math.min(dist[v],dist[u] + graph[u][v]);
-        }
-      }
-    }
-    return dist;
-  }
-}
-```
-### Kosaraju's algorithm (Strongly connected components)
+### Strongly connected components
+* Kosaraju's algorithm
 ```
 import java.util.*;
 public class Graph{
@@ -336,5 +309,33 @@ public class Graph{
         }
         return tr;
     }
+}
+```
+### Shortest distance
+* Dijkstra's algorithm
+```
+import java.util.*;
+public class Graph{
+  public static int[] dijkstra(int graph[][],int V, int s){
+    int dist[] = new int[V];
+    Arrays.fill(dist,Integer.MAX_VALUE);
+    dist[s] = 0;
+    boolean fin[] = new boolean[V];
+    for(int count=0;count<V;count++){
+      int u = -1;
+      for(int v=0;v<V;v++){
+        if(!fin[v] && (u==-1 || dist[v]<dist[u])){
+          u = v;
+        }
+      }
+      fin[u] = true;
+      for(int v=0;v<V;v++){
+        if(!fin[v] && graph[v][u]!=0){
+          dist[v] = Math.min(dist[v],dist[u] + graph[u][v]);
+        }
+      }
+    }
+    return dist;
+  }
 }
 ```
