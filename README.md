@@ -312,6 +312,32 @@ public class Graph{
 }
 ```
 ### Shortest distance
+* Shortest path in unweighted undirected graph (BFS solution)
+```
+import java.util.*;
+public class Graph{
+  public static int[] shortestPath(int graph[][],int V, int s){
+    int dist[] = new int[V];
+    Arrays.fill(dist,Integer.MAX_VALUE);
+    dist[s] = 0;
+    boolean visited[] = new boolean[V];
+    Queue<Integer> q = new LinkedList<>();
+    q.add(s);
+    visited[s] = true;
+    while(!q.isEmpty()){
+      int u = q.poll();
+      for(int v=0;v<V;v++){
+        if(visited[v]==false && graph[u][v]!=0){
+          dist[v] = dist[u] + 1;
+          visited[v] = true;
+          q.add(v);
+        }
+      }
+    }
+    return dist;
+  }
+}
+```
 * Dijkstra's algorithm
 ```
 import java.util.*;
@@ -320,17 +346,17 @@ public class Graph{
     int dist[] = new int[V];
     Arrays.fill(dist,Integer.MAX_VALUE);
     dist[s] = 0;
-    boolean fin[] = new boolean[V];
+    boolean visited[] = new boolean[V];
     for(int count=0;count<V;count++){
       int u = -1;
       for(int v=0;v<V;v++){
-        if(!fin[v] && (u==-1 || dist[v]<dist[u])){
+        if(!visited[v] && (u==-1 || dist[v]<dist[u])){
           u = v;
         }
       }
-      fin[u] = true;
+      visited[u] = true;
       for(int v=0;v<V;v++){
-        if(!fin[v] && graph[v][u]!=0){
+        if(!visited[v] && graph[v][u]!=0){
           dist[v] = Math.min(dist[v],dist[u] + graph[u][v]);
         }
       }
