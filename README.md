@@ -395,8 +395,8 @@ public class Graph{
 }
 ```
 * Dijkstra's algorithm
-  - Time complexity V*E
-  - Time complexity can be improved to VlogE if used priority queue
+  - Time complexity V*V
+  - Time complexity can be improved to ElogV if used priority queue and adjecency list
 ```
 import java.util.*;
 public class Graph{
