@@ -394,7 +394,7 @@ public class Graph{
   }
 }
 ```
-* Dijkstra's algorithm
+* Dijkstra's algorithm (Undirected, positive weighted, cyclic, positive)
   - Time complexity V*V
   - Time complexity can be improved to ElogV if used priority queue and adjecency list
 ```
