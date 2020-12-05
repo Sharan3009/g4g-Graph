@@ -222,6 +222,8 @@ public class Graph{
 }
 ```
 ### Prim's algorithm (Minimum spanning tree)
+* Time complexity is V^2
+* Time complexity can be improved to ElogV by implementing heaps and adjecency list
 ```
 import java.util.*;
 public class Graph{
