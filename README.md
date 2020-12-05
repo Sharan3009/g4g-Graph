@@ -423,3 +423,38 @@ public class Graph{
   }
 }
 ```
+* Bellman-Ford Algorithm (for negative weights, but also should not contain negative weighted cycle)
+  - Time complexity is O(VE)
+```
+import java.util.*;
+public class Graph{
+  void BellmanFord(int[][]graph, int V, int src) 
+    { 
+        int dist[] = new int[V]; 
+        Arrays.fill(dist,Integer.MAX_VALUE);
+        dist[src] = 0; 
+  
+        for (int u = 0; u < V-1; u++) { 
+            for (int v = 0; v < V; v++) { 
+                int weight = graph[u][v];
+                if (dist[u] != Integer.MAX_VALUE && weight!=0 && dist[u] + weight < dist[v]) 
+                    dist[v] = dist[u] + weight; 
+            } 
+        } 
+        
+        for(int u=0;u<V;u++){
+          for(int v=0;v<V;v++){
+            int weight = graph[u][v];
+            if (dist[u] != Integer.MAX_VALUE && weight!=0 && dist[u] + weight < dist[v]){
+                System.out.println("Graph contains negative weight cycle"); 
+                return; 
+            }
+          }
+        }
+        
+        for(int i=0;i<V;i++){
+          System.out.println(dist[i]);
+        }
+    } 
+}
+```
