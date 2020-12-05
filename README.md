@@ -313,7 +313,7 @@ public class Graph{
 ```
 ### Shortest distance
 * Shortest path in unweighted undirected graph (BFS solution)
-- Time complexity V+E
+  - Time complexity V+E
 ```
 import java.util.*;
 public class Graph{
@@ -340,7 +340,7 @@ public class Graph{
 }
 ```
 * Shortest path in Direct Acyclic Graph (DAG)
-- Time complexity V+E
+  - Time complexity V+E
 ```
 import java.util.*;
 public class Graph{
@@ -393,8 +393,8 @@ public class Graph{
 }
 ```
 * Dijkstra's algorithm
-- Time complexity V*E
-- Time complexity can be improved to VlogE if used priority queue
+  - Time complexity V*E
+  - Time complexity can be improved to VlogE if used priority queue
 ```
 import java.util.*;
 public class Graph{
