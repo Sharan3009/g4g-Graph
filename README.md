@@ -201,9 +201,9 @@ public class Graph{
     }
     int count = 0;
     Queue<Integer> q = new LinkedList<>();
-    for(int d:indegree){
-      if(d==0){
-        q.add(d);
+    for(int i=0;i<V;i++){
+      if(indegree[i]==0){
+        q.add(i);
       }
     }
     while(!q.isEmpty()){
@@ -313,6 +313,7 @@ public class Graph{
 ```
 ### Shortest distance
 * Shortest path in unweighted undirected graph (BFS solution)
+- Time complexity V+E
 ```
 import java.util.*;
 public class Graph{
@@ -338,7 +339,62 @@ public class Graph{
   }
 }
 ```
+* Shortest path in Direct Acyclic Graph (DAG)
+- Time complexity V+E
+```
+import java.util.*;
+public class Graph{
+  public static int[] shortestPath(int[][] graph, int V,int s){
+    int topo[] = findTopoSort(graph,V);
+    int dist[] = new int[V];
+    Arrays.fill(dist,Integer.MAX_VALUE);
+    dist[s] = 0;
+    for(int u:topo){
+      for(int v=0;v<V;v++){
+        if(graph[u][v]!=0 && dist[v] > dist[u]+graph[u][v]){
+          dist[v] = dist[u] + graph[u][v];
+        }
+      }
+    }
+    return dist;
+  }
+  
+  public static int[] findTopoSort(int[][] graph, int V){
+    int indegree[] = new int[V];
+    for(int i=0;i<V;i++){
+      for(int j=0;j<V;j++){
+        if(graph[i][j]!=0){
+          indegree[j]++;
+        }
+      }
+    }
+    ArrayList<Integer> al = new ArrayList<>();
+    Queue<Integer> q = new LinkedList<>();
+    for(int i=0;i<V;i++){
+      if(indegree[i]==0){
+        q.add(i);
+      }
+    }
+    while(!q.isEmpty()){
+      int u = q.poll();
+      al.add(u);
+      for(int i=0;i<V;i++){
+        int v = graph[u][i]
+        if(graph[u][i]!=0){
+          indegree[v]--;
+          if(indegree[v]==0){
+            q.add(v);
+          }
+        }
+      }
+    }
+    return al.toArray();
+  }
+}
+```
 * Dijkstra's algorithm
+- Time complexity V*E
+- Time complexity can be improved to VlogE if used priority queue
 ```
 import java.util.*;
 public class Graph{
