@@ -394,7 +394,7 @@ public class Graph{
   }
 }
 ```
-* Dijkstra's algorithm (Undirected, positive weighted, cyclic, positive)
+* Dijkstra's algorithm (Undirected/Directed, positive weighted, may contain cycles)
   - Time complexity V*V
   - Time complexity can be improved to (V+E)logV if used priority queue and adjecency list
 ```
