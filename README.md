@@ -405,7 +405,7 @@ public class Graph{
     Arrays.fill(dist,Integer.MAX_VALUE);
     dist[s] = 0;
     boolean visited[] = new boolean[V];
-    for(int count=0;count<V;count++){
+    for(int count=0;count<V-1;count++){
       int u = -1;
       for(int v=0;v<V;v++){
         if(!visited[v] && (u==-1 || dist[v]<dist[u])){
