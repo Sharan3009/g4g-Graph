@@ -252,6 +252,49 @@ public class Graph{
     }
 }
 ```
+
+### Articulation points
+```
+import java.util.*;
+public class Graph{
+    private static int time = 1;
+    public static ArrayList<Integer> articulationPoints(ArrayList<ArrayList<Integer>> graph, int V){
+        ArrayList<Integer> pts = new ArrayList<>();
+        int d[] = new int[V];
+        int l[] = new int[V];
+        int parent[] = new int[V];
+        dfs(graph,d,l,0,-1,pts);
+        return pts;
+    }
+    
+    public static void dfs(ArrayList<ArrayList<Integer>> graph, int[] d, int[] l, int v, int p,ArrayList<Integer> pts){
+        d[v] = time;
+        l[v] = time++;
+        int child = 0;
+        boolean isArticulation = false;
+        for(int u:graph.get(v)){
+            if(u==p){
+                continue;
+            }
+            if(d[u]==0){
+                child++;
+                dfs(graph,d,l,u,v,pts);
+                if(d[v]<=l[u]){
+                    isArticulation = true;
+                } else {
+                    l[v] = Math.min(l[v],d[u]);
+                }
+            } else {
+                    l[v] = Math.min(l[v],d[u]);
+            }
+        }
+        if((p==-1 && child>1) || (p!=-1 && isArticulation)){
+            pts.add(v);
+        }
+    }
+}
+```
+
 ### Strongly connected components
 * Kosaraju's algorithm
 ```
