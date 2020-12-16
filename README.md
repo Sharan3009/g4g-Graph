@@ -295,6 +295,50 @@ public class Graph{
 }
 ```
 
+### Bridge edges
+```
+import java.util.*;
+public class Graph{
+    private static int time = 1;
+    
+    public static ArrayList<String> bridgeEdges(ArrayList<ArrayList<Integer>> graph, int V){
+        ArrayList<String> pts = new ArrayList<>();
+        int d[] = new int[V];
+        int l[] = new int[V];
+        int parent[] = new int[V];
+        for(int i=0;i<V;i++){
+            if(d[i]==0){
+                dfs(graph,d,l,i,-1,pts);
+            }
+        }
+        return pts;
+    }
+    
+    public static void dfs(ArrayList<ArrayList<Integer>> graph, int[] d, int[] l, int v, int p,ArrayList<String> pts){
+        d[v] = time;
+        l[v] = time++;
+        int w = -1;
+        for(int u:graph.get(v)){
+            if(u==p){
+                continue;
+            }
+            if(d[u]==0){
+                dfs(graph,d,l,u,v,pts);
+                l[v] = Math.min(l[v],l[u]);
+                if(d[v]<l[u]){
+                    w = u;
+                }
+            } else {
+                    l[v] = Math.min(l[v],d[u]);
+            }
+        }
+        if(w!=-1){
+            pts.add(v+" -> "+ w);
+        }
+    }
+}
+```
+
 ### Strongly connected components
 * Kosaraju's algorithm
 ```
