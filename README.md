@@ -401,6 +401,55 @@ public class Graph{
     }
 }
 ```
+* Tarjan's algorithm
+```
+import java.util.*;
+public class Graph{
+
+    private int time = 1;
+    
+    public void find(ArrayList<ArrayList<Integer>> adj, int N)
+    {
+        int d[] = new int[N];
+        int l[] = new int[N];
+        boolean reccSt[] = new boolean[N];
+        Stack<Integer> st = new Stack<>();
+        for(int i=0;i<N;i++){
+            if(d[i]==0){
+                dfs(adj,d,l,i,reccSt,st);
+            }
+        }
+    }
+    
+    public void dfs(ArrayList<ArrayList<Integer>> adj,int[] d, int[] l,int v, boolean[] reccSt, Stack<Integer> st){
+        d[v] = time;
+        l[v] = time++;
+        reccSt[v] = true;
+        st.push(v);
+        for(int u:adj.get(v)){
+            if(d[u]==0){
+                dfs(adj,d,l,u,reccSt,st);
+                l[v] = Math.min(l[v],l[u]);
+            } else {
+                if(reccSt[u]){
+                    l[v] = Math.min(l[v],d[u]);
+                }
+            }
+        }
+        int u=-1;
+        if(l[v]==d[v]){
+            StringBuilder sb = new StringBuilder();
+            while(u!=v){
+                u = st.pop();
+                sb.append(u+" ");
+                reccSt[u] = false;
+            }
+            System.out.print(sb.toString().trim()+",");
+        }
+    }
+}
+```
+
 ### Shortest distance
 * Shortest path in unweighted undirected graph (BFS solution)
   - Time complexity V+E
