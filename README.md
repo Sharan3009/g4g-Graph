@@ -408,7 +408,7 @@ public class Graph{
 
     private int time = 1;
     
-    public void find(ArrayList<ArrayList<Integer>> adj, int N)
+    public void tarjan(ArrayList<ArrayList<Integer>> adj, int N)
     {
         int d[] = new int[N];
         int l[] = new int[N];
