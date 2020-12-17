@@ -263,7 +263,9 @@ public class Graph{
         int d[] = new int[V];
         int l[] = new int[V];
         int parent[] = new int[V];
-        dfs(graph,d,l,0,-1,pts);
+        for(int i=0;i<V;i++){
+            dfs(graph,d,l,i,-1,pts);
+        }
         return pts;
     }
     
@@ -271,7 +273,7 @@ public class Graph{
         d[v] = time;
         l[v] = time++;
         int child = 0;
-        boolean isArticulation = false;
+        int w = -1;
         for(int u:graph.get(v)){
             if(u==p){
                 continue;
@@ -279,16 +281,15 @@ public class Graph{
             if(d[u]==0){
                 child++;
                 dfs(graph,d,l,u,v,pts);
+                l[v] = Math.min(l[v],l[u]);
                 if(d[v]<=l[u]){
-                    isArticulation = true;
-                } else {
-                    l[v] = Math.min(l[v],d[u]);
+                    w = u;
                 }
             } else {
-                    l[v] = Math.min(l[v],d[u]);
+                l[v] = Math.min(l[v],d[u]);
             }
         }
-        if((p==-1 && child>1) || (p!=-1 && isArticulation)){
+        if((p==-1 && child>1) || (p!=-1 && w!=-1)){
             pts.add(v);
         }
     }
@@ -325,14 +326,14 @@ public class Graph{
             if(d[u]==0){
                 dfs(graph,d,l,u,v,pts);
                 l[v] = Math.min(l[v],l[u]);
-                if(d[v]<l[u]){
+                if(d[v]<l[u]){  // change from articulation point
                     w = u;
                 }
             } else {
-                    l[v] = Math.min(l[v],d[u]);
+                l[v] = Math.min(l[v],d[u]);
             }
         }
-        if(w!=-1){
+        if(w!=-1){  // change from articulation point
             pts.add(v+" -> "+ w);
         }
     }
